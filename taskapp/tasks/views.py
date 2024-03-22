@@ -1,16 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import Task
+
 def index(request):
     return HttpResponse('Hello World! This came from the index view.')
 
 def task_list(request):
+    tasks = Task.objects.all
     ctx = {
-        "tasks": [
-            "task 1",
-            "task 2",
-            "task 3",
-            "task 4"
-        ]
+        "tasks": tasks
     }
-    return render(request, "tasks/task_list.html", ctx)
+    return render(request, "task_list.html", ctx)

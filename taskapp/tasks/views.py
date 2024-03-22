@@ -7,9 +7,9 @@ def index(request):
     return HttpResponse('Hello World! This came from the index view.')
 
 def task_list(request):
-    tasks = Task.objects.all
+    tasks = Task.objects.all()
     ctx = {
-        "tasks": tasks
+        'tasks': tasks
     }
     return render(request, "task_list.html", ctx)
 

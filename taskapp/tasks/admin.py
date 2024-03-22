@@ -22,7 +22,6 @@ class TaskAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ('Details', {
-            
             'fields': [
                 ('name', 'due_date'), 'taskgroup'
             ]

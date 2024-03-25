@@ -36,7 +36,7 @@ def task_detail(request, pk):
     return render(request, "task_detail.html", ctx)
 
 
-# # Option 2 for 5-Tasklist-Input
+# Option 2 for 5-Tasklist-Input
 class TaskListView(ListView):
     model = Task
     template_name = "task_list.html"

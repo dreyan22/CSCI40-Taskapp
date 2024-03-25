@@ -36,9 +36,24 @@ def task_detail(request, pk):
     return render(request, "task_detail.html", ctx)
 
 
+# # Option 2 for 5-Tasklist-Input
 class TaskListView(ListView):
     model = Task
     template_name = "task_list.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["taskgroups"] = TaskGroup.objects.all()
+        return ctx
+    
+    def post(self, request, *args, **kwargs):
+        task = Task()
+        task.name = request.POST["task_name"]
+        task.due_date = request.POST["task_due"]
+        task.taskgroup = TaskGroup.objects.get(pk=request.POST.get("taskgroup"))
+        task.save()
+
+        return self.get(request, *args, **kwargs)
 
 
 class TaskDetailView(LoginRequiredMixin, DetailView):

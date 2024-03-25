@@ -19,6 +19,34 @@
                     <a href="{{ task.get_absolute_url }}">{{ task.name }}</a>
                 </li>
             {% endfor %}
+            <form method="POST">
+                {% csrf_token %}
+                <label for="task_name">
+                    <span>
+                        Task Name
+                    </span>
+                    <input type="text" id="task_name" name="task_name">
+                </label>
+                <label for="task_due">
+                    <span>
+                        Task Due Date
+                    </span>
+                    <input type="datetime-local" id="task_due" name="task_due">
+                    <span>
+                        Taskgroup
+                    </span>
+                    <select id="taskgroup" name="taskgroup">
+                        {% for group in taskgroups %}
+                            <option value="{{ group.pk }}">
+                                {{ group }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </label>
+                <button type="submit">
+                    Submit
+                </button>
+            </form>
         </ul>
     </body>
 </html>

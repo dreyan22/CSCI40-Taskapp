@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 from .models import Task, TaskGroup
 from .forms import TaskForm
@@ -81,3 +82,12 @@ class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'task_create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('tasks:list')
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'task_detail.html'

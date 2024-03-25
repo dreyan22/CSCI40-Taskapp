@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -57,11 +58,12 @@ class TaskListView(ListView):
     def post(self, request, *args, **kwargs):
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = Task()
-            task.name = form.cleaned_data.get('name')
-            task.due_date = form.cleaned_data.get('due_date')
-            task.taskgroup = form.cleaned_data.get('taskgroup')
-            task.save()
+            # task = Task()
+            # task.name = form.cleaned_data.get('name')
+            # task.due_date = form.cleaned_data.get('due_date')
+            # task.taskgroup = form.cleaned_data.get('taskgroup')
+            # task.save()
+            form.save()
             return self.get(request, *args, **kwargs)
         else:
             self.object_list = self.get_queryset(**kwargs)
@@ -73,3 +75,9 @@ class TaskListView(ListView):
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "task_detail.html"
+
+
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = TaskForm
+    template_name = 'task_create.html'

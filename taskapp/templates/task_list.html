@@ -21,7 +21,8 @@
             {% endfor %}
             <form method="POST">
                 {% csrf_token %}
-                <label for="task_name">
+                {{ form.as_div }}
+                <!-- <label for="task_name">
                     <span>
                         Task Name
                     </span>
@@ -42,7 +43,7 @@
                             </option>
                         {% endfor %}
                     </select>
-                </label>
+                </label> -->
                 <button type="submit">
                     Submit
                 </button>

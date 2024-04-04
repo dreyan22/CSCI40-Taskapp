@@ -17,6 +17,7 @@ class Task(models.Model):
         on_delete=models.CASCADE,
         related_name='students'
     )
+    task_image = models.ImageField(upload_to='images', null=True)
     def __str__(self):
         return '{}: due on {} unit(s)'.format(self.name, self.due_date)
     def get_absolute_url(self):

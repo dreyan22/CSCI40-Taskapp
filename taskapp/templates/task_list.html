@@ -1,8 +1,11 @@
-<html lang="en-US">
-    <head>
-        <title>Task List</title>
-    </head>
-    <body>
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}{% endblock %}
+
+{% block page_title %}Task List{% endblock %}
+{% block scripts %}{% endblock %}
+
+{% block main %}
         {% if request.user.is_authenticated %}
             <h1>Hello {{ request.user.username }}</h1>
             <form action="{% url 'logout' %}" method="POST">
@@ -50,5 +53,4 @@
                 <!-- {% include 'task_create.html' %} -->
             </form>
         </ul>
-    </body>
-</html>
+{% endblock %}

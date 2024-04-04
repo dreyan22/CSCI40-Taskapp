@@ -1,13 +1,21 @@
-<html lang="en-US">
-    <head>
-        <title>Task Detail</title>
-    </head>
-    <body>
-        <h1>{{ object.name }}</h1>
-        <ul>
-            <li>Task Group: {{ object.taskgroup }}</li>
-            <li>Due Date: {{ object.due_date }}</li>
-        </ul>
-        <a href="/tasks/list">Return to Task List</a>
-    </body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}{% endblock %}
+
+{% block page_title %}Task List{% endblock %}
+{% block scripts %}{% endblock %}
+
+{% block main %}
+    {% if object.task_image %}
+        <img src="{{ object.task_image.url }}" alt="">
+    {% endif %}
+    <p>{{ object }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit">
+            Submit
+        </button>
+        <!-- {% include 'task_create.html' %} -->
+    </form>
+{% endblock %}
